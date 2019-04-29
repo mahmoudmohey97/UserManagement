@@ -9,6 +9,7 @@ class Company
     public $PASSWORD;
     public $NAME;
     public $NUMEMPLOYEES;
+
     public function __construct($db)
     {
         $this-> conn = $db;
@@ -77,7 +78,6 @@ class Company
 
     function create()
     {
-        
         $query = "INSERT INTO " . $this->table_name . "
             SET
                 EMAIL = :EMAIL,

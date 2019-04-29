@@ -8,6 +8,7 @@ include_once 'objects/company.php';
 include_once 'objects/interest.php';
 include_once 'objects/companyLocation.php';
 
+
 $database = new Database();
 $db = $database->getConnection();
 $company = new Company($db);
@@ -16,6 +17,8 @@ $companyLocation = new CompanyLocation($db);
 $data = json_decode(file_get_contents("php://input"));
 $interest->choosenInterests = $data->interests;
 $companyLocation->companyLocations = $data->locations;
+$data = json_decode(file_get_contents("php://input"));
+$interest->choosenInterests = $data->interests;
 $company->EMAIL = $data->EMAIL;
 $company->NAME = $data->NAME;
 $company->NUMEMPLOYEES = $data->NUMEMPLOYEES;
@@ -39,6 +42,7 @@ if ($company->create()) {
              http_response_code(http_response_code(500));
              echo json_encode(array("message" => "failed to create locations"));
         }
+
     }
     else
     {
