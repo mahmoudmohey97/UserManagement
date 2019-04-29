@@ -100,6 +100,9 @@ class User
                     FROM skills , applicant WHERE SKILLID IN 
                     ( SELECT hasskills.SKILLID FROM hasskills WHERE hasskills.USERID = applicant.USERID ) GROUP BY applicant.USERNAME";
         //$query = "select FNAME, LNAME, AGE , EMAIL , USERNAME from applicant";
+        $querylocations = "select applicant.FNAME , applicant.LNAME, applicant.AGE , applicant.EMAIL ,applicant.USERNAME ,applicant.GENDER,applicant.MOBILENUM, interest.INTERESTS
+                    FROM applicant, interest
+                    WHERE applicant.USERID = interest.USERID";
         $stmt = $this->conn->query($query);
         return $stmt;
     }

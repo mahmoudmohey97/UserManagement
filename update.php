@@ -6,24 +6,28 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once'config/database.php';
 include_once 'objects/user.php';
 include_once 'objects/skill.php';
+include_once 'objects/interest.php';
 
-//verify that no place is empty
 
 $database = new Database();
 $db = $database->getConnection();
 $user = new User($db);
 $skill = new Skill($db);
+$interest = new Interest($db);
 $data = json_decode(file_get_contents("php://input"));
 
 $skill->SKILL = $data->SKILL;
+$interest->choosenInterests = $data->interests;
+=======
+$data = json_decode(file_get_contents("php://input"));
 
+$skill->SKILL = $data->SKILL;
 $user->EMAIL = $data->EMAIL;
 $user->FNAME = $data->FNAME;
 $user->AGE = $data->AGE;
 $user->MOBILENUM = $data->MOBILENUM;
 $user->GENDER = $data->GENDER;
 $user->LNAME = $data->LNAME;
-
 
 if($user->update($user->EMAIL))
 {
@@ -32,6 +36,18 @@ if($user->update($user->EMAIL))
    {
 
        $skill->update($id);
+       if($interest->deleteApplicant($id))
+       {
+        $interest->updateApplicant($id);
+        http_response_code(200);
+        echo json_encode(array("message"=>"update 8aleban succesfull"));
+       }
+       else
+       {
+        http_response_code(500);
+        echo json_encode(array("meesage"=>"error deleting interests"));
+       }
+       
        http_response_code(200);
        echo json_encode(array("message"=>"update 8aleban succesfull"));
    }

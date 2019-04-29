@@ -10,9 +10,6 @@ class Company
     public $NAME;
     public $NUMEMPLOYEES;
 
-
-
-
     public function __construct($db)
     {
         $this-> conn = $db;
@@ -87,8 +84,6 @@ class Company
                 NAME = :NAME,
                 NUMEMPLOYEES = :NUMEMPLOYEES,
                 PASSWORD = :PASSWORD";
-
-
 
         $stmt = $this-> conn-> prepare($query);
 

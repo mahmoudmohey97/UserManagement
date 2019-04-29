@@ -23,7 +23,7 @@ $user-> EMAIL = $data->EMAIL;
 $user-> USERNAME = $data-> USERNAME;
 $user-> PASSWORD = $data-> PASSWORD;
 $skill->SKILL = $data-> SKILL;
-
+$interest->choosenInterests = $data-> interests;
 if($user->emailExists())
 {
     http_response_code(400);
@@ -39,7 +39,9 @@ else
         {
             http_response_code(200);
             echo json_encode(array("message" => "Skill was created."));
+            if ($interest->createForApplicant()) {
             if ($interest->create()) {
+
                 http_response_code(201);
                 echo json_encode(array("message" => "interests created"));
             }
