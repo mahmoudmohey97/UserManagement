@@ -1,15 +1,15 @@
 version: "2"
 services:
-  webserver:
-    build: ./
-    ports:
-      - "80:80"
-    volumes:
-      - ./src:/var/www/html/
-    links:
-      - db
-    networks:
-      - default
+  # webserver:
+  #   build: ./
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./src:/var/www/html/
+  #   links:
+  #     - db
+  #   networks:
+  #     - default
   db:
     image: mariadb
     ports:

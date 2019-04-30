@@ -11,11 +11,11 @@ services:
 before_install:
 # - sudo service mysql stop
 - service --status-all
-- docker-compose build
+# - docker-compose build
 - docker-compose up -d
 
 script:
 #- find . -type f -iname "*.php" -print0 | xargs -0 -n1 php -l
-- python tests/user.py
+# - python tests/user.py
 - docker exec usermanagement_db_1 bash -c 'echo test | mysql -u root -p -e "use usermanagement; select * from applicant"'
 #- python tests/company.py
