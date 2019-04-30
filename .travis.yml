@@ -10,10 +10,11 @@ sudo: required
 
 before_install:
 - sudo service mysql stop
-- docker-compose up -d
-- docker exec usermanagement_db_1 sh -c "service mysql restart"
+- services --status-all
+#- docker-compose up -d
+#- docker exec usermanagement_db_1 "service mysql restart"
 
 script:
-- find . -type f -iname "*.php" -print0 | xargs -0 -n1 php -l
-- python tests/user.py
-- python tests/company.py
+#- find . -type f -iname "*.php" -print0 | xargs -0 -n1 php -l
+#- python tests/user.py
+#- python tests/company.py
