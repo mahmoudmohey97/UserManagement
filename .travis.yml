@@ -15,7 +15,7 @@ before_install:
 
 script:
 - find . -type f -iname "*.php" -print0 | xargs -0 -n1 php -l
-- sleep 10
+- sleep 7
 - docker exec usermanagement_db_1 bash -c 'service --status-all'
 - python tests/user.py
 - python tests/company.py
