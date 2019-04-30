@@ -21,6 +21,7 @@ script:
 #- find . -type f -iname "*.php" -print0 | xargs -0 -n1 php -l
 # - python tests/user.py
 - ifconfig
+- sleep 5
 - mysql -h 172.17.0.1 -u root -ptest
 #- docker exec usermanagement_db_1 bash -c 'ifconfig; echo test | mysql -u root -p -e "use usermanagement; select * from applicant"'
 #- python tests/company.py
