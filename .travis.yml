@@ -3,6 +3,8 @@ language: bash
 # php:
 # - 7.3.4
 
+dist: trusty
+
 services: 
 - docker
 
