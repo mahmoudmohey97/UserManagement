@@ -10,7 +10,7 @@ sudo: required
 
 before_install:
 - sudo service mysql stop
-- services --status-all
+- service --status-all
 #- docker-compose up -d
 #- docker exec usermanagement_db_1 "service mysql restart"
 
