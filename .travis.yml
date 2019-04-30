@@ -1,4 +1,4 @@
-language: php
+language: bash #php
 
 php:
 - 7.3.4
@@ -6,13 +6,13 @@ php:
 services: 
 - docker
 
-sudo: required
+#sudo: required
 
 before_script:
-- sudo service mysql stop
+#- sudo service mysql stop
 - docker-compose up -d
 
 script:
-- find . -type f -iname "*.php" -print0 | xargs -0 -n1 php -l
+#- find . -type f -iname "*.php" -print0 | xargs -0 -n1 php -l
 - python tests/user.py
 - python tests/company.py

@@ -1,8 +1,6 @@
 import requests as rq
 import json
 
-fails = 0
-
 def test(function, data, method):
 	if method == 'post':
 		r = rq.post('http://127.0.0.1/' + function + '.php', data=json.dumps(data))
@@ -11,9 +9,10 @@ def test(function, data, method):
 	if r.status_code > 299 or 'error' in r.content:
 		print('\nERROR: ' + function)
 		print(r.content)
-		fails += 1
+		return False
 	else:
 		print(function + ' Passed.')
+		return True
 
 functions = ['create_user', 'login', 'readById', 'update']
 data = {'create_user' : {
@@ -47,8 +46,11 @@ data = {'create_user' : {
 						}
 		} 
 
+fails = 0
 for function in functions:
-	test(function, data[function], 'post')
-test('read', '', 'get')
+	if not test(function, data[function], 'post'):
+		fails += 1
+if not test('read', '', 'get'):
+	fails += 1
 #test('readById', data['readById'])
 exit(fails)
