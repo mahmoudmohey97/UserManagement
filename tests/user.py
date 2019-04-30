@@ -52,5 +52,4 @@ for function in functions:
 		fails += 1
 if not test('read', '', 'get'):
 	fails += 1
-#test('readById', data['readById'])
 exit(fails)

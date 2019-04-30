@@ -9,9 +9,10 @@ def test(function, data, method):
 	if r.status_code > 299 or 'error' in r.content:
 		print('\nERROR: ' + function)
 		print(r.content)
-		exit(1)
+		return False
 	else:
 		print(function + ' Passed.')
+		return True
 
 functions = ['create_company', 'login', 'readCompanyById', 'updateCompany']
 data = {'create_company' : {
@@ -38,7 +39,10 @@ data = {'create_company' : {
                             }
 		} 
 
+fails = 0
 for function in functions:
-	test(function, data[function], 'post')
-test('readCompany', '', 'get')
-#test('readById', data['readById'])
+	if not test(function, data[function], 'post'):
+		fails += 1
+if not test('readCompany', '', 'get'):
+    fails += 1
+exit(fails)
