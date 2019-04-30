@@ -11,9 +11,8 @@ sudo: required
 before_script:
 - sudo service mysql stop
 - docker-compose up -d
-- printf "[mysql]\nuser = root\npassword = test\n" > ~/.my.cnf
-- mysql -h 127.0.0.1 -e "SET GLOBAL wait_timeout=600;" -u root
- 
+- printf "[mysql]\nbind-address = 172.17.0.1\nuser = root\npassword = test\n" > ~/.my.cnf; cat ~/.my.cnf; mysql -h 127.0.0.1 -e "SET GLOBAL wait_timeout=600;" -u root
+
 script:
 - find . -type f -iname "*.php" -print0 | xargs -0 -n1 php -l
 - python tests/user.py
