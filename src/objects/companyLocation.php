@@ -35,7 +35,7 @@ class CompanyLocation
     {
         //echo "---------->".$id ;
         $query = "DELETE FROM companylocation
-                         WHERE CompanyLocation.USERID ='{$id}'";
+                         WHERE USERID ='{$id}'";
         $var = $this->conn->query($query);
         //$query2 = "DELETE FROM hasskills WHERE hasskills.USERID = '{$id}'";
         //$var2 = $this->conn->query($query2);

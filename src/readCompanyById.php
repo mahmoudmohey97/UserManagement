@@ -7,12 +7,12 @@ include_once 'objects/company.php';
 
 $database = new Database();
 $db = $database->getConnection();
-
+$data = json_decode(file_get_contents("php://input"));
 $company = new Company($db);
 $idn= $data->USERID;
 $stmt = $company->readById($idn);
 $num = $stmt->rowCount();
-//echo($num);
+echo($num);
 if($num > 0)
 {
     $company_arr = array();
