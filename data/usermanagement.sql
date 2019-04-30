@@ -21,6 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `usermanagement`
 --
+CREATE DATABASE IF NOT EXISTS usermanagement; USE usermanagement;
 
 -- --------------------------------------------------------
 

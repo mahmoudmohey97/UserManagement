@@ -8,19 +8,21 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once 'config/database.php';
 include_once 'objects/user.php';
+include_once 'objects/company.php';
 $database = new Database();
 $db = $database->getConnection();
-
 // instantiate user object
+$company = new Company($db);
 $user = new User($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
 // set product property values
 $user->EMAIL = $data->EMAIL;
+$company->EMAIL = $data->EMAIL;
 $email_exists = $user->emailExists();
 
-if($email_exists && ($data->PASSWORD == $user->PASSWORD))
+if($email_exists && ($data->PASSWORD == $user->PASSWORD) || $company->emailExists() && ($data->PASSWORD == $company->PASSWORD))
 {
     http_response_code(200);
     echo json_encode(array("message" => "login succesful"));
