@@ -1,0 +1,21 @@
+language: php
+
+php:
+- 7.3.4
+
+services: 
+- docker
+
+sudo: required
+
+before_install:
+- sudo service mysql stop
+- docker-compose build
+- docker-compose up -d
+
+script:
+- find . -type f -iname "*.php" -print0 | xargs -0 -n1 php -l
+- sleep 7
+- docker exec usermanagement_db_1 bash -c 'service --status-all'
+- python tests/user.py
+- python tests/company.py
